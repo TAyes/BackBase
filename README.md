@@ -57,9 +57,6 @@ This application uses the Model-View-ViewModel (refered to as MVVM) UI architect
 ### SupportingFiles
 - Include cities.json
 
-### Scenes
-- Group of app scenes.
-
 ### Solution details,
 - decode data from json file and save it in array
 - used Trie data structure to save all cities
