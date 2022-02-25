@@ -39,13 +39,13 @@ This application uses the Model-View-ViewModel (refered to as MVVM) UI architect
 
 ### Modules
 - Include 
-	*CityMap(MapViewController), 
-	*FindCities(View(CityTableCell,CitiesViewModel,CitiesTableViewController),Model(City)) .
+	*CityMap/MapViewController, 
+	*FindCities/(View/CityTableCell,CitiesViewModel,CitiesTableController),(Model/City).
 
 ### Navigation
 - Include Navigator, Destination
 
-### ServiceProtocol
+### Protocol
 - Include CitiesLoader
 
 ### CommonComponents
