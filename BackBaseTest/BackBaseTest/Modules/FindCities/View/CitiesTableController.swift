@@ -1,8 +1,8 @@
 //
-//  CitiesTableViewController.swift
+//  CitiesTableController.swift
 //  BackBaseTest
 //
-//  Created by shisheo portal on 25/02/2022.
+//  Created by shisheo portal on 26/02/2022.
 //
 
 import UIKit
@@ -96,3 +96,5 @@ private extension CitiesTableController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
+
+
