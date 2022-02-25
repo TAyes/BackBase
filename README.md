@@ -1,76 +1,81 @@
-# Mobile assignment RnD
+# BackBase
+Swift Assessment Test 
 
-The goal of this assignment is to evaluate the problem solving skills, UX judgement and code quality of the candidate.
+## Building And Running The Project (Requirements)
+* Swift 5.0+
+* Xcode 11.5+
+* iOS 11.0+
 
-We have a list of cities containing around 200k entries in JSON format. Each entry contains the following information:
+# Getting Started
+- If this is your first time encountering swift/ios development, please follow [the instructions](https://developer.apple.com/support/xcode/) to setup Xcode and Swift on your Mac.
+
+
+## Setup Configs
+- Checkout master branch to run latest version
+- Open the project by double clicking the `BackBaseTest.xcodeproj` file
+- Select the build scheme which can be found right after the stop button on the top left of the IDE
+- [Command(cmd)] + R - Run app
+```
+// App Settings
+APP_NAME = BackBaseTest
+PRODUCT_BUNDLE_IDENTIFIER = com.rr.cc.BackBaseTest
+
+#targets:
+* BackBaseTest
+* BackBaseTestTests
 
 ```
-{
-    "country":"UA",
-    "name":"Hurzuf",
-    "_id":707860,
-    "coord":{
-            "lon":34.283333,
-        "lat":44.549999
-    }
-}
-```
 
-Your task is to:
-* Load the list of cities from [here](cities.json).
-* Be able to filter the results by a given prefix string, following these requirements:
-     * Follow the prefix definition specified in the clarifications section below.
-     * Implement a search algorithm optimised for fast runtime searches. Initial loading time of the app does not matter.
-     * Search is case insensitive.
-     * **Time efficiency for filter algorithm should be better than linear**
-* Display these cities in a scrollable list, in alphabetical order (city first, country after). Hence, "Denver, US" should appear before "Sydney, Australia".
-     * The UI should be as responsive as possible while typing in a filter.
-     * The list should be updated with every character added/removed to/from the filter.
-* Each city's cell should:
-     * Show the city and country code as title.
-     * Show the coordinates as subtitle.
-     * When tapped, show the location of that city on a map.
-* Provide unit tests showing that your search algorithm is displaying the correct results giving different inputs, including invalid inputs.
+# Build and or run application by doing:
+* Select the build scheme which can be found right after the stop button on the top left of the IDE
+* [Command(cmd)] + B - Build app
+* [Command(cmd)] + R - Run app
 
-## Additional requirements/restrictions:
+## Architecture
+This application uses the Model-View-ViewModel (refered to as MVVM) UI architecture,
 
-* The list will be provided to you as a plain text JSON format array.
-* You can preprocess the list into any other representation that you consider more efficient
-for searches and display. Provide information of why that representation is more efficient
-in the comments of the code.
-* Database implementations are forbidden
-* Provide unit tests, that your search algorithm is displaying the correct results giving
-different inputs, including invalid inputs.
-* Alpha/beta versions of the IDE are forbidden, you must work with the stable version of
-the IDE
-* The code of the assignment has to be delivered along with the git repository (.git folder).
-We want to see the progress evolution
-* Screen rotation should be allowed 
-* Language must be Swift
-* Compatible with the 2 latest major versions of iOS
-* 3rd party libraries are forbidden.
 
-## Assessment:
-Once submitted, your solution will be checked on the requirements/restrictions mentioned above as well as:
-- Technical Skills
-- Documentation
-- Coding/Problem solving skills
-- Code Efficiency, Maintainability, Scalability
-- Architecture and Design Patterns
-- Version Control
-- Testing
-- Platform Knowledge
+## Structure
 
-## Clarifications
+### Modules
+- Include 
+	*CityMap(MapViewController), 
+	*FindCities(View(CityTableCell,CitiesViewModel,CitiesTableViewController),Model(City)) .
 
-We define a prefix string as: a substring that matches the initial characters of the target string. For instance, assume the following entries:
+### Navigation
+- Include Navigator, Destination
 
-* Alabama, US
-* Albuquerque, US
-* Anaheim, US
-* Arizona, US
-* Sydney, AU
+### ServiceProtocol
+- Include CitiesLoader
 
-If the given prefix is "A", all cities but Sydney should appear. Contrariwise, if the given prefix is "s", the only result should be "Sydney, AU".
-If the given prefix is "Al", "Alabama, US" and "Albuquerque, US" are the only results.
-If the prefix given is "Alb" then the only result is "Albuquerque, US"
+### CommonComponents
+- Include Network+Error,  Observable , Trie ..etc
+
+### Extensions
+- Include UITableView+Cell,  Array+Sort , UISearchBar+ActivityIndicator ..etc
+
+### SupportingFiles
+- Include cities.json
+
+### Scenes
+- Group of app scenes.
+
+### Solution details,
+- decode data from json file and save it in array
+- used Trie data structure to save all cities
+  Using Trie will need time proportional to M * log N, where M is maximum string length and N is number of keys in tree. so we can search the key in O(M) time.
+
+ - https://en.wikipedia.org/wiki/Trie
+
+#### screen shots:
+
+![Search (White) scene](https://github.com/TAyes/BackBase/blob/main/Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20Max%20-%202022-02-26%20at%2000.02.13.png)
+![Results (White) scene](https://github.com/TAyes/BackBase/blob/main/Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20Max%20-%202022-02-26%20at%2000.02.25.png)
+![Map (White) scene](https://github.com/TAyes/BackBase/blob/main/Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20Max%20-%202022-02-26%20at%2000.02.36.png)
+![Map (White-Landscape) scene](https://github.com/TAyes/BackBase/blob/main/Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20Max%20-%202022-02-26%20at%2000.02.47.png)
+
+![Search (dark) scene](https://github.com/TAyes/BackBase/blob/main/Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20Max%20-%202022-02-26%20at%2000.03.09.png)
+![Results (dark) scene](https://github.com/TAyes/BackBase/blob/main/Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20Max%20-%202022-02-26%20at%2000.03.28.png)
+![Map (dark) scene](https://github.com/TAyes/BackBase/blob/main/Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20Max%20-%202022-02-26%20at%2000.03.37.png)
+![Map (dark-Landscape) scene](https://github.com/TAyes/BackBase/blob/main/Screenshots/Simulator%20Screen%20Shot%20-%20iPhone%2013%20Pro%20Max%20-%202022-02-26%20at%2000.03.43.png)
+
